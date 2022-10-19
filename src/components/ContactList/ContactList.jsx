@@ -1,6 +1,5 @@
 import {ContactListItems, ContactListItem, ContactListButton} from './ContactList.styled';
 import PropTypes from 'prop-types';
-import {BsTelephone} from "react-icons/bs";
 
 export const ContactList = ({ contacts, onDeleteContact }) => {
         return(
@@ -11,7 +10,7 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
               return (
                 <ContactListItem key={contact.id}>
                   <p>
-                    <span>{contact.name} : &ensp; <BsTelephone/></span>&ensp;
+                    <span>{contact.name} :</span>
                     {contact.number}
                   </p>
                   <ContactListButton type="button"
