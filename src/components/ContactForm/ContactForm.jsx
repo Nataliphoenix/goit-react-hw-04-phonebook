@@ -79,6 +79,5 @@ export class ContactForm extends React.Component {
 } 
 
 ContactForm.propTypes = {
-  name: PropTypes.string, 
-  number: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired, 
 };

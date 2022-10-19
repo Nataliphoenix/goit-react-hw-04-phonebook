@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
 import {Container} from './App.styled';
 import { Section } from 'components/Section/Section';
 import { ContactForm } from 'components/ContactForm/ContactForm';
-import { Filter } from 'components/Filter';
+import { Filter } from 'components/Filter/Filter';
 import {ContactList} from 'components/ContactList/ContactList';
 
 export class App extends React.Component {
@@ -78,8 +77,3 @@ export class App extends React.Component {
 
     )
 }}
-
-App.propTypes = {
-  filtrFormChange: PropTypes.func,
-  filter: PropTypes.string,
-};

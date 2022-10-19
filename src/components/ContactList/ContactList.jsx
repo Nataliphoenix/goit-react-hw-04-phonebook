@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const ContactList = ({ contacts, onDeleteContact }) => {
         return(
             <ContactListItems>
-              {contacts.length === 0 ? null : (
+              {contacts.length ? (
           <>
             {contacts.map(contact => {
               return (
@@ -24,12 +24,16 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
               );
             })}
           </>
-        )}
+        ) :null }
             </ContactListItems>
         )
     }
 
     ContactList.propTypes = {
       onDeleteContact: PropTypes.func,
-      contacts: PropTypes.array.isRequired,
+      contacts: PropTypes.arrayOf( PropTypes.shape({
+        number: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
+      })).isRequired,
     };
