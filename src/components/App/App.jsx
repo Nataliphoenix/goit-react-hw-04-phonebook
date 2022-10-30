@@ -4,8 +4,8 @@ import { nanoid } from 'nanoid';
 import {Container} from './App.styled';
 import { Section } from 'components/Section/Section';
 import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
-import {ContactList} from 'components/ContactList/ContactList';
 
 export class App extends React.Component {
 
@@ -19,10 +19,27 @@ export class App extends React.Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const localStorageContacts = localStorage.getItem('contacts');
+    const parseContacts = JSON.parse(localStorageContacts);
+    if (localStorageContacts) {
+      this.setState({ contacts: parseContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
   formAddContact = data => {
+    console.log('formAddContact')
     data.id = nanoid();
 
     const { contacts } = this.state;
+    console.log('contacts',{ contacts })
     const isExistContact = contacts.find(contact => contact.name === data.name);
 
     isExistContact

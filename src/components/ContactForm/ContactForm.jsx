@@ -4,12 +4,11 @@ import {BsJournalPlus} from "react-icons/bs";
 import {BsTelephone} from "react-icons/bs";
 import { nanoid } from 'nanoid';
 import { Form, ContactFormInput, ContactFormLabel, ContactFormButton } from 'components/ContactForm/ContactForm.styled';
-
 export class ContactForm extends React.Component {
 
     state = {
-        name: '',
-        number: ''
+      name: '',
+      number: '',
       }
 
       nameId = nanoid();
@@ -22,8 +21,8 @@ export class ContactForm extends React.Component {
           [name]: value
         })
        
-      } 
-      
+      }
+
       handleAddContacts = e => {
         e.preventDefault()
         this.props.onSubmit(this.state);
@@ -32,8 +31,9 @@ export class ContactForm extends React.Component {
 
       reset =() =>{
         this.setState({
+          id:'',
           name: '',
-          number: ''
+          number: '',
         })
       }
 
