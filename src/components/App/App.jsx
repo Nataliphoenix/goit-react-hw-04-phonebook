@@ -1,14 +1,13 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 
-import {Container} from './App.styled';
+import { Container } from './App.styled';
 import { Section } from 'components/Section/Section';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 
 export class App extends React.Component {
-
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -35,24 +34,21 @@ export class App extends React.Component {
   }
 
   formAddContact = data => {
-    console.log('formAddContact')
     data.id = nanoid();
 
     const { contacts } = this.state;
-    console.log('contacts',{ contacts })
     const isExistContact = contacts.find(contact => contact.name === data.name);
 
     isExistContact
-    ? alert(`${data.name} is already in contacts`)
-    : this.setState(prevState => ({
+      ? alert(`${data.name} is already in contacts`)
+      : this.setState(prevState => ({
           contacts: [...prevState.contacts, data],
-        }))
-  }
+        }));
+  };
 
   onInputChange = e => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
-
 
   filtrFormChange = () => {
     const { contacts, filter } = this.state;
@@ -60,37 +56,32 @@ export class App extends React.Component {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filtrToLowerCase)
     );
-      
-  }
+  };
 
   onDeleteContact = idContact => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => idContact !== contact.id),
     }));
-    }
-  
+  };
 
   render() {
-  const { filter } = this.state;
-  const filteredContacts = this.filtrFormChange();
+    const { filter } = this.state;
+    const filteredContacts = this.filtrFormChange();
 
-  return (
+    return (
+      <Container>
+        <Section title="Phonebook">
+          <ContactForm onSubmit={this.formAddContact} />
+        </Section>
 
-    <Container>
-
-      <Section title="Phonebook">
-        <ContactForm onSubmit = {this.formAddContact}  />
-      </Section>
-
-      <Section title="Contacts">
-        <Filter filter={filter} onChange={this.onInputChange} />
-        <ContactList
-          contacts={filteredContacts}
-          onDeleteContact={this.onDeleteContact}
-        />
-      </Section>
-
-    </Container>
-
-    )
-}}
+        <Section title="Contacts">
+          <Filter filter={filter} onChange={this.onInputChange} />
+          <ContactList
+            contacts={filteredContacts}
+            onDeleteContact={this.onDeleteContact}
+          />
+        </Section>
+      </Container>
+    );
+  }
+}
